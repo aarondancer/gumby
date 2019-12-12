@@ -1,0 +1,62 @@
+{
+  "name": "gumby",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "umd:main": "dist/gumby.umd.production.js",
+  "module": "dist/gumby.es.production.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build --entry src/index.ts --name gumby",
+    "prepare": "npm run build",
+    "test": "tsdx test",
+    "lint": "NODE_ENV=production eslint --ext .ts,.tsx,.js,.jsx \"src/\" --fix",
+    "format": "prettier --write \"src/**/*.@(js|jsx|ts|tsx)\" && yarn lint",
+    "typecheck": "tsc --noEmit -p ./"
+  },
+  "resolutions": {
+    "typescript": "3.7.3"
+  },
+  "devDependencies": {
+    "@emotion/core": "10.0.22",
+    "@emotion/styled": "10.0.23",
+    "@testing-library/react": "9.3.3",
+    "@types/hoist-non-react-statics": "3.3.1",
+    "@types/jest": "24.0.23",
+    "@types/react": "16.9.16",
+    "@types/react-test-renderer": "16.9.1",
+    "@typescript-eslint/eslint-plugin": "2.11.0",
+    "@typescript-eslint/parser": "2.11.0",
+    "emotion-theming": "10.0.19",
+    "eslint": "5.16.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-config-prettier": "6.7.0",
+    "eslint-import-resolver-webpack": "0.12.0",
+    "eslint-loader": "3.0.3",
+    "eslint-plugin-import": "2.17.1",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-react": "7.17.0",
+    "eslint-plugin-react-hooks": "2.3.0",
+    "jest-emotion": "10.0.26",
+    "polished": "3.4.2",
+    "prettier": "1.19.1",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-test-renderer": "16.12.0",
+    "tsdx": "0.5.8",
+    "typescript": "3.7.3"
+  },
+  "dependencies": {
+    "csstype": "2.6.7",
+    "hoist-non-react-statics": "3.3.1"
+  },
+  "peerDependencies": {
+    "@emotion/core": ">= 10.0.0",
+    "@emotion/styled": ">= 10.0.0"
+  }
+}
