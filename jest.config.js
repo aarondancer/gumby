@@ -7,7 +7,6 @@ module.exports = {
   collectCoverageFrom: ["src/**/*.{ts,tsx}"],
   testMatch: ["<rootDir>/test/**/*.(spec|test).{ts,tsx}"],
   testURL: "http://localhost",
-  rootDir: "gumby",
   watchPlugins: [
     "jest-watch-typeahead/filename.js",
     "jest-watch-typeahead/testname.js"
