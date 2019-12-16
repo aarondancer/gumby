@@ -1,8 +1,9 @@
-import React from "react";
+import React, { createRef } from "react";
 
 import { ThemeProvider } from "emotion-theming";
 import serializer, { matchers } from "jest-emotion";
 import renderer from "react-test-renderer";
+import { renderIntoDocument } from "react-dom/test-utils";
 
 import {
   backgrounds,
@@ -38,7 +39,7 @@ describe("styled", () => {
   const Box = styled("div", { styleProps })<BoxProps>();
 
   it("should provide new `displayName`", () => {
-    expect(Box.displayName).toBe("gumbyStyled(div)");
+    expect(Box.displayName).toBe("DSLibStyled(div)");
   });
 
   it("should allow overriding the `displayName`", () => {
@@ -244,5 +245,26 @@ describe("styled", () => {
 
     const Heading = styled("h1")();
     Heading.defaultProps = { ...Paragraph.defaultProps };
+  });
+
+  it(`allows passing "ref" for intrinsic components`, () => {
+    const inputRef = createRef<any>();
+
+    const TestInput = styled("input")();
+
+    renderIntoDocument(<TestInput ref={inputRef} />);
+
+    expect(inputRef.current).toBeInstanceOf(HTMLInputElement);
+  });
+
+  it(`allows passing "ref" for extrinsic components`, () => {
+    let inputElement: HTMLInputElement | null = null;
+
+    const TestInputIntrinsic = styled("input")();
+    const TestInputExtrinsic = styled(TestInputIntrinsic)();
+
+    renderIntoDocument(<TestInputExtrinsic ref={el => (inputElement = el)} />);
+
+    expect(inputElement).toBeInstanceOf(HTMLInputElement);
   });
 });

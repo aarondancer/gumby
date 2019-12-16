@@ -1,12 +1,9 @@
 /**
  * Omits properties from a type
  * @template T Object
- * @template K Union of T keys
+ * @template U Union of T keys
  */
-export type Omit<ObjectType, KeysType extends keyof ObjectType> = Pick<
-  ObjectType,
-  Exclude<keyof ObjectType, KeysType>
->;
+export type Omit<T, U> = T extends any ? Pick<T, Exclude<keyof T, U>> : never;
 
 /**
  * Merge two types into a new type. Keys of the second type overrides keys of the first type.
@@ -14,17 +11,8 @@ export type Omit<ObjectType, KeysType extends keyof ObjectType> = Pick<
  * @template FirstType - The first type
  * @template SecondType - The second type
  */
-export type Merge<FirstType, SecondType> = Omit<
-  FirstType,
-  Extract<keyof FirstType, keyof SecondType>
-> &
+export type Merge<FirstType, SecondType> = Omit<FirstType, keyof SecondType> &
   SecondType;
-
-export type UnionToIntersection<U> = (U extends any
-  ? (k: U) => void
-  : never) extends ((k: infer I) => void)
-  ? I
-  : never;
 
 /**
 Matches any [primitive value](https://developer.mozilla.org/en-US/docs/Glossary/Primitive).
